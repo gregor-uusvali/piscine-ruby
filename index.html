@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ruby Server</title>
+</head>
+<body>
+  <h1>Hello there!</h1>
+  <div id="area">
+        <h4>Guess the hex color</h4>
+        <h4 id="result"></h4>
+        <div id="options">
+        </div>
+  </div>
+</body>
+<script>
+const arr = "0123456789ABCDEF";
+const options = document.getElementById("options");
+const result = document.getElementById("result");
+
+function generateGame() {
+    const randomHex = [...Array(3)].map(() => "#" + [...Array(6)].map(() => arr[Math.floor(Math.random() * 16)]).join(""));
+    document.body.style.backgroundColor = randomHex[0];
+    
+    const shuffledHex = shuffle([...randomHex]);
+    
+    options.innerHTML = "";
+    shuffledHex.forEach(hex => {
+        const option = document.createElement("button");
+        option.innerHTML = hex;
+        options.appendChild(option);
+        
+        option.addEventListener("click", () => {
+            result.innerHTML = hex === randomHex[0] ? "Correct" : "Incorrect";
+            randomHex.fill("#");
+            generateGame();
+        });
+    });
+}
+
+generateGame();
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+</script>
+</html>
