@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ruby Server</title>
+</head>
+<body>
+  <div id="area">
+        <a href="/">Back</a>
+        <h4>Generate Ascii Art</h4>
+        <form method="post" action="/generate-ascii">
+            <textarea placeholder="Text to generate ascii art..." name="user-input"></textarea>
+            <button type="submit">Generate</button>
+        </form>
+        <% if @data.ascii_art %>
+        <pre><%= @data.ascii_art %></pre>
+        <% else %>
+        <p>No ASCII Art generated.</p>
+        <% end %>
+  </div>
+</body>
+</html>
